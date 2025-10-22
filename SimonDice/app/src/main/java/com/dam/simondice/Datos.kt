@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
  * @property estado Estado del juego
  */
 object Datos {
+    var numero = 0
     var ronda = 0
     var secuencia = mutableListOf<Int>()
     var secuenciaUsuario = mutableListOf<Int>()

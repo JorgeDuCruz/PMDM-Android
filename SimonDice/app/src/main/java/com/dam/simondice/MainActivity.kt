@@ -16,9 +16,10 @@ import com.dam.simondice.ui.theme.SimonDiceTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val miViewModel: MyViewModel = MyViewModel()
         enableEdgeToEdge()
         setContent {
-            IU()
+            IU(miViewModel)
         }
     }
 }
@@ -27,5 +28,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    IU()
+    IU(MyViewModel())
 }
