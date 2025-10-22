@@ -40,10 +40,13 @@ class MyViewModel(): ViewModel() {
         Log.d(TAG_LOG, "comprobamos")
         return if (ordinal == Datos.numero) {
             Log.d(TAG_LOG, "es correcto")
+            crearRandom()
             true
         } else {
             Log.d(TAG_LOG, "no es correcto")
+            crearRandom()
             false
         }
+
     }
 }

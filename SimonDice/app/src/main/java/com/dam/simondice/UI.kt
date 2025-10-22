@@ -39,9 +39,9 @@ fun Menu(miViewModel: MyViewModel){
 
 
 @Composable
-fun Puntuacion(){
+fun Puntuacion(texto: String = "Puntuación:"){
     Text(
-        text = "Puntuación: ",
+        text = texto,
         modifier = Modifier.padding(top = 100.dp)
     )
 }
@@ -74,7 +74,7 @@ fun Boton(enum_color: Colores,miViewModel: MyViewModel) {
         onClick = {
             Log.d("Juego","Click!"+ enum_color.txt+" numero: "+enum_color.ordinal)
             miViewModel.comprobar(enum_color.ordinal)
-                  },
+        },
         shape = RoundedCornerShape(0.dp),
         modifier = Modifier
             .size((150).dp)
