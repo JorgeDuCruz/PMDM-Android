@@ -2,9 +2,13 @@ package com.dam.simondice
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MyViewModel(): ViewModel() {
+    private val _puntuacion = MutableLiveData<Int>(0)
+    val puntuacion: LiveData<Int> = _puntuacion
     // etiqueta para logcat
     private val TAG_LOG = "miDebug"
 
@@ -40,13 +44,23 @@ class MyViewModel(): ViewModel() {
         Log.d(TAG_LOG, "comprobamos")
         return if (ordinal == Datos.numero) {
             Log.d(TAG_LOG, "es correcto")
+            sumarPuntuacion()
             crearRandom()
             true
         } else {
             Log.d(TAG_LOG, "no es correcto")
             crearRandom()
+            restarPuntuacion()
             false
         }
 
+    }
+
+    fun sumarPuntuacion(){
+        _puntuacion.value = (_puntuacion.value)?.plus(1)
+    }
+
+    fun restarPuntuacion(){
+        _puntuacion.value = (_puntuacion.value)?.minus(1)
     }
 }

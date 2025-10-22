@@ -13,6 +13,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.LocalLifecycleOwner
 
 @Composable
 fun IU(miViewModel: MyViewModel) {
@@ -30,7 +35,7 @@ fun IU(miViewModel: MyViewModel) {
 fun Menu(miViewModel: MyViewModel){
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Puntuacion()
+            Puntuacion(miViewModel = miViewModel)
             Botonera(miViewModel)
             Inicio(miViewModel)
         }
@@ -39,7 +44,12 @@ fun Menu(miViewModel: MyViewModel){
 
 
 @Composable
-fun Puntuacion(texto: String = "Puntuación:"){
+fun Puntuacion(miViewModel: MyViewModel){
+    var texto by remember { mutableStateOf("Puntuación: ") }
+    miViewModel.puntuacion.observe(LocalLifecycleOwner.current) { puntuacion ->
+        texto = "Puntuación: $puntuacion"
+        Log.d("CambioPuntuacion",texto)
+    }
     Text(
         text = texto,
         modifier = Modifier.padding(top = 100.dp)
