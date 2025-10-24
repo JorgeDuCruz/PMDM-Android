@@ -35,7 +35,7 @@ fun Menu(miViewModel: MyViewModel){
     val puntuacion by miViewModel._puntuacion.observeAsState(0)
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Puntuacion(miViewModel = miViewModel,puntuacion)
+            Puntuacion(puntuacion)
             Botonera(miViewModel)
             Inicio(miViewModel)
         }
@@ -44,7 +44,7 @@ fun Menu(miViewModel: MyViewModel){
 
 
 @Composable
-fun Puntuacion(miViewModel: MyViewModel,puntuacion: Int?){
+fun Puntuacion(puntuacion: Int?){
 
     Text(
         text = "Puntuación: $puntuacion",
