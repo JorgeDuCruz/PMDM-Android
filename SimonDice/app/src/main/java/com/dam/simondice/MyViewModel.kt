@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MyViewModel(): ViewModel() {
-    private val _puntuacion = MutableLiveData<Int>(0)
-    val puntuacion: LiveData<Int> = _puntuacion
+    val _puntuacion = MutableLiveData<Int?>(0)
+
     // etiqueta para logcat
     private val TAG_LOG = "miDebug"
 
