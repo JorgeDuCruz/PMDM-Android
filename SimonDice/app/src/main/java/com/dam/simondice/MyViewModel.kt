@@ -5,9 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class MyViewModel(): ViewModel() {
-    val _puntuacion = MutableLiveData<Int?>(0)
+    val _puntuacion = MutableStateFlow<Int?>(0)
 
     // etiqueta para logcat
     private val TAG_LOG = "miDebug"

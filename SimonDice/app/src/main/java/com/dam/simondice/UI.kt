@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 
@@ -32,7 +33,7 @@ fun IU(miViewModel: MyViewModel) {
 
 @Composable
 fun Menu(miViewModel: MyViewModel){
-    val puntuacion by miViewModel._puntuacion.observeAsState(0)
+    val puntuacion by miViewModel._puntuacion.collectAsState()
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
             Puntuacion(puntuacion)
