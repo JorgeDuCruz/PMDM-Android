@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class MyViewModel(): ViewModel() {
     val _puntuacion = MutableStateFlow<Int?>(0)
 
-    val _currentState = MutableStateFlow<Estado?>(Estado.INICIO)
+    val _currentState = MutableLiveData<Estado?>(Estado.INICIO)
 
     // etiqueta para logcat
     private val TAG_LOG = "miDebug"
