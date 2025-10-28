@@ -23,13 +23,10 @@ object Datos {
  *
  */
 
-enum class Estado {
-    INICIO,
-    SECUENCIA,
-    ESPERANDO,
-    ENTRADA,
-    COMPROBANDO,
-    FINALIZADO
+enum class Estado(val start_activo: Boolean, val boton_activo: Boolean) {
+    INICIO(start_activo = true,boton_activo = false),
+    GENERANDO(start_activo = false,boton_activo = false),
+    ADIVINANDO(start_activo = false,boton_activo = true),
 }
 
 /**

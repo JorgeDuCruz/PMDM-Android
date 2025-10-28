@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class MyViewModel(): ViewModel() {
     val _puntuacion = MutableStateFlow<Int?>(0)
 
+    val _currentState = MutableStateFlow<Estado?>(Estado.INICIO)
+
     // etiqueta para logcat
     private val TAG_LOG = "miDebug"
 
@@ -26,6 +28,7 @@ class MyViewModel(): ViewModel() {
      * crear entero random
      */
     fun crearRandom() {
+        cambiarEstado(Estado.GENERANDO)
         _numbers.value = (0..3).random()
         Log.d(TAG_LOG, "creamos random ${_numbers.value}")
         actualizarNumero(_numbers.value)
@@ -34,6 +37,7 @@ class MyViewModel(): ViewModel() {
     fun actualizarNumero(numero: Int) {
         Log.d(TAG_LOG, "actualizamos numero en Datos")
         Datos.numero = numero
+        cambiarEstado(Estado.ADIVINANDO)
     }
 
     /**
@@ -63,5 +67,9 @@ class MyViewModel(): ViewModel() {
 
     fun restarPuntuacion(){
         _puntuacion.value = (_puntuacion.value)?.minus(1)
+    }
+
+    fun cambiarEstado(estado: Estado){
+        _currentState.value = estado
     }
 }
