@@ -1,12 +1,12 @@
 package dam.pmdm.ejemplotest
 
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.DisplayName
 
 
-class MyViewModelTest {
+class MyViewModelTestUnitario {
     private lateinit var viewModel: MyViewModel
 
     // @BeforeEach se ejecuta ANTES de cada test. Es el equivalente de @Before en JUnit 4.
@@ -17,7 +17,7 @@ class MyViewModelTest {
 
 
     @Test
-    // @DisplayName es una anotación de JUnit 5 que permite poner nombres descriptivos a los tests.
+    @DisplayName("addRandom debería devolver un número entre 0 y 9")
     fun addRandom_shouldReturnNumberBetween0And9() {
         // --- ARRANGE ---
         // El ViewModel ya está creado en setUp()
@@ -29,6 +29,8 @@ class MyViewModelTest {
         // --- ASSERT ---
         // Comprobamos que el número está en el rango esperado usando Truth
         assertTrue("Entre 0 y 9", numeroAleatorio in 0..9)
+
+        println("numero aleatorio: $numeroAleatorio")
     }
 }
 

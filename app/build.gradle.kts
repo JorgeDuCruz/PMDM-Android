@@ -56,9 +56,14 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    // Dependencias para tests unitarios locales (en el directorio /test)
-    testImplementation(libs.junit)
+    // JUnit5
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.jupiter.engine)
 
-    // Opcional pero muy recomendado para aserciones más legibles
-    testImplementation("com.google.truth:truth:1.4.5")
+    // para las corutinas y StateFlow
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+
+
+    // para poder ejecutar los test
+    testImplementation("androidx.test:runner:1.7.0")
 }
