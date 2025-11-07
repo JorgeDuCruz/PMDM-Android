@@ -9,7 +9,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 
-
+/**
+ * Pruebas unitarias para MyViewModel.
+ * Usamos JUnit 5 y corutinas.
+ */
 @OptIn(ExperimentalCoroutinesApi::class)
 class MyViewModelTestUnitario {
     private lateinit var viewModel: MyViewModel
