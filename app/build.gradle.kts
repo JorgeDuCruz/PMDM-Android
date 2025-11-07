@@ -56,14 +56,24 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    // JUnit5
-    testImplementation(libs.junit.jupiter)
-    testRuntimeOnly(libs.junit.jupiter.engine)
+    // JUnit5 - usar dependencias explícitas de Jupiter API y Engine
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 
-    // para las corutinas y StateFlow
+    // para las corutinas y StateFlow (versión moderna)
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
 
 
-    // para poder ejecutar los test
+    // para poder ejecutar los test (opcional, pero útil para algunas utilidades)
     testImplementation("androidx.test:runner:1.7.0")
+}
+
+// Configurar Gradle Test para usar JUnit Platform (JUnit 5) y generar reportes HTML/XML
+// Esto asegura que @DisplayName se muestre al ejecutar con JUnit Platform.
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    reports {
+        junitXml.required.set(true)
+        html.required.set(true)
+    }
 }

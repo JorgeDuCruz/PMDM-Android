@@ -14,12 +14,12 @@ class MyViewModel : ViewModel() {
     // funcion para actualizar la variable
     // necesitamos usar la propiedad "value" ya que es un MutableStateFlow
     fun addRandom(): Int {
-        val enteroRandom = Random.nextInt(0,10)
+        val enteroRandom = Random.nextInt(0, 10)
         return enteroRandom
     }
 
     fun actualizaNumero(){
-        val numeroActual = addRandom()
+        val numeroActual = addRandom() // si ponemos algo diferente a un enter el test falla
         currentName.value = numeroActual.toString()
         Log.d("actualiza", "actualizo: $numeroActual")
     }

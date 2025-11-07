@@ -100,3 +100,6 @@ app/build/reports/tests/testDebugUnitTest/index.html
 
 - Los tests instrumentados (`androidTest`) siguen ejecutándose con el runner de Android y normalmente no usan JUnit 5.
 - Asegúrate de tener `JAVA_HOME` correctamente configurado antes de ejecutar Gradle en la terminal.
+  - MacOS: export JAVA_HOME="/Users/nombre_usuario/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+- Algunos test utilizan la clase `Log`de Android. Para evitar errores en tests unitarios, puedes usar bibliotecas como `mockk` o `robolectric` para simular el comportamiento de Android.
+  - Otra manera es crear una clase de utilidad que maneje los logs y puedas mockearla en los tests (ver ejemplo `Log.java`)

@@ -1,58 +1,56 @@
 package dam.pmdm.ejemplotest
 
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class MyViewModelTestUnitario {
     private lateinit var viewModel: MyViewModel
 
-    // @BeforeEach se ejecuta ANTES de cada test. Es el equivalente de @Before en JUnit 4.
-    @Before
+    // @BeforeEach se ejecuta ANTES de cada test en JUnit 5.
+    @BeforeEach
     fun setUp() {
         viewModel = MyViewModel()
     }
 
     @Test
-    fun initialValueIsSet() {
+    @DisplayName("El valor inicial de currentName debe ser '(valor inicial)'")
+    fun initialValueIsSet() = runTest {
         val vm = MyViewModel()
+        // comparamos con el value directo del StateFlow
         assertEquals("(valor inicial)", vm.currentName.value)
-    }
 
+        // también podemos recoger el primer valor
+        val firstValue = vm.currentName.first()
+        assertEquals("(valor inicial)", firstValue)
+    }
 
     @Test
     @DisplayName("addRandom debería devolver un número entre 0 y 9")
     fun addRandom_shouldReturnNumberBetween0And9() {
-        // --- ARRANGE ---
-        // El ViewModel ya está creado en setUp()
-
         // --- ACT ---
-        // Llamamos al método que queremos probar
         val numeroAleatorio = viewModel.addRandom()
 
         // --- ASSERT ---
-        // Comprobamos que el número está en el rango esperado usando Truth
-        assertTrue("Entre 0 y 9", numeroAleatorio in 0..9)
-
-        println("numero aleatorio: $numeroAleatorio")
+        assertTrue(numeroAleatorio in 0..9, "Entre 0 y 9")
     }
 
     @Test
-    fun actualizaNumeroUpdatesCurrentName() {
-        val vm = MyViewModel()
+    @DisplayName("actualizaNumero debe actualizar currentName (StateFlow) y ser entero")
+    fun actualizaNumeroUpdatesCurrentName() = runTest {
         // Act
-        vm.actualizaNumero()
+        viewModel.actualizaNumero()
 
-        // Assert: el value se actualiza inmediatamente
-        val value = vm.currentName.value
+        // Assert: leer el value actual del StateFlow
+        val value = viewModel.currentName.first()
         val intVal = value?.toIntOrNull()
-        //assertNotNull(intVal, "currentName debe ser convertible a Int")
-        Assertions.assertTrue(intVal!! in 0..9, "currentName debe estar entre 0 y 9")
+        assertTrue(intVal != null && intVal in 0..9)
     }
 }
-
