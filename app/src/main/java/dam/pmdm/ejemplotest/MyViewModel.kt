@@ -19,7 +19,7 @@ class MyViewModel : ViewModel() {
     }
 
     fun actualizaNumero(){
-        val numeroActual = "a" // addRandom() // si ponemos algo diferente a un enter el test falla
+        val numeroActual = addRandom() // si ponemos algo diferente a un enter el test falla
         currentName.value = numeroActual.toString()
         Log.d("actualiza", "actualizo: $numeroActual")
     }
