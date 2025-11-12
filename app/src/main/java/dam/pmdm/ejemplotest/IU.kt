@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun IU(model: MyViewModel){
@@ -21,6 +22,7 @@ fun IU(model: MyViewModel){
 
     // Observamos el contenido ('value') de la variable 'currentName' del ViewModel
     val newName = model.currentName.collectAsState().value
+    val estadoAux = model.currentStateAux.collectAsState().value
 
     // centramos contenido
     Column(
@@ -29,14 +31,14 @@ fun IU(model: MyViewModel){
         horizontalAlignment = Alignment.CenterHorizontally // Centra los elementos horizontalmente.
     ) {
         // llamamos a las funciones que tienen los objetos de la IU
-        ActualizaTexto(newName)
+        ActualizaTexto(newName,estadoAux)
         Boton(model)
     }
 }
 
 @Composable
-fun ActualizaTexto(newName: String?) {
-    Text(text = "Hola $newName!")
+fun ActualizaTexto(newName: String?,estado : String?) {
+    Text(text = "Hola $newName!\n Estado: $estado")
     Log.d("actualiza", "actualizo: $newName")
 
 }
@@ -46,4 +48,10 @@ fun Boton(model: MyViewModel) {
     Button(onClick = { model.actualizaNumero() }) {
         Text(text = "Añade un numero")
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun UIPreview() {
+    IU(model = MyViewModel())
 }
