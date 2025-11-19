@@ -6,7 +6,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class MyViewModel: ViewModel() {
+object MyViewModel: ViewModel() {
 
     val _estadoActual = MutableStateFlow<Estados>(Estados.ESTADO1)
     val _cuentaAtras = MutableStateFlow<Int>(3)
@@ -23,7 +23,7 @@ class MyViewModel: ViewModel() {
     }
 
     fun CuentaAtras(){
-        _cuentaAtras.value = 3
+        _cuentaAtras.value = 4
         viewModelScope.launch {
             while (_cuentaAtras.value > 0) {
                 _cuentaAtras.value--

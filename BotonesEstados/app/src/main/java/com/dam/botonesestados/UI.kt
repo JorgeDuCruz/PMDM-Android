@@ -61,5 +61,5 @@ fun Extra(estadoActual: Estados,myViewModel: MyViewModel){
 @Preview(showBackground = true)
 @Composable
 fun UIPreview(){
-    UI(MyViewModel())
+    UI(MyViewModel)
 }
