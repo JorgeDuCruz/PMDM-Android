@@ -1,5 +1,6 @@
 package com.dam.botonesestados
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
@@ -38,6 +39,10 @@ object MyViewModel: ViewModel() {
         }else{
             _mensaje.value = ""
         }
+    }
+
+    fun hacerSonido(){
+        Log.d("Sonido","Do")
     }
 
 

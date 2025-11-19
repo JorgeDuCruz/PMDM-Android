@@ -10,5 +10,7 @@ enum class Estados (val onClick:()->Unit){
     ESTADO2({ Log.d("Preuea","Estado 2")
         MyViewModel.CuentaAtras()
     }),
-    ESTADO3({ Log.d("Preuea","Estado 3")})
+    ESTADO3({ Log.d("Preuea","Estado 3")
+        MyViewModel.hacerSonido()
+    })
 }
