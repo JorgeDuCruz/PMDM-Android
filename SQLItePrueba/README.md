@@ -124,3 +124,55 @@ por lo que necesitamos recorrer el cursor con `moveToNext()`, y con ayuda de un 
 
 Es importante que cuando terminemos de recoger los datos del cursor le hagamos un `.close()` para liberar sus recursos.
 
+```
+        val title = "MyNewTitle"
+        val valuesA = ContentValues().apply {
+            put(FeedEntry.COLUMN_NAME_TITLE, title)
+        }
+
+        val selectionA = "${FeedEntry.COLUMN_NAME_TITLE} LIKE ?"
+        val selectionArgsA = arrayOf("My Title")
+        val count = db.update(
+            FeedEntry.TABLE_NAME,
+            valuesA,
+            selectionA,
+            selectionArgsA)
+        Log.d(TAG,"Actualizando base $count")
+```
+
+Para actualizar datos primero creamos una variable con los datos actualizados,
+después usamos, al igual que con el select, una selección de a quien actualizarle los valores y finalmente 
+usar `.update()` con los valores a actualizar y los filtros de a quien actualizar.
+
+El método `.update()` devuelve el número de columnas actualizadas.
+
+
+```
+val cursorA = dbl.query(
+            FeedEntry.TABLE_NAME,   // The table to query
+            projection,             // The array of columns to return (pass null to get all)
+            selectionA,              // The columns for the WHERE clause
+            arrayOf(title),          // The values for the WHERE clause
+            null,                   // don't group the rows
+            null,                   // don't filter by row groups
+            sortOrder               // The sort order
+        )
+        Log.d(TAG,"valores recibidos")
+
+
+        val itemIdsA = mutableListOf<String>()
+
+        with(cursorA) {
+            while (moveToNext()) {
+                val itemId = getString(getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_TITLE))
+                Log.d(TAG,"Valor = $itemId")
+
+                itemIdsA.add(itemId)
+            }
+        }
+        Log.d(TAG,"Valores = $itemIdsA")
+
+        cursor.close()
+```
+Repito los pasos del select para verificar que se actualizaran.
+
