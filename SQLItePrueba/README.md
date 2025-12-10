@@ -176,3 +176,19 @@ val cursorA = dbl.query(
 ```
 Repito los pasos del select para verificar que se actualizaran.
 
+
+```
+        val selectionD = "${FeedEntry.COLUMN_NAME_TITLE} LIKE ?"
+        val selectionArgsD = arrayOf("MyNewTitle")
+        val deletedRows = db.delete(FeedEntry.TABLE_NAME, selectionD, selectionArgsD)
+        Log.d(TAG,"Borrando datos $deletedRows")
+
+        Log.d(TAG,"Desconectando base")
+
+        dbHelper.close()
+```
+
+Para eliminar datos, al igual que al leerlos, creamos variables para seleccionar qué datos borrar, luego hacemos un 
+`.delete()` con el nombre de la tabla donde vas a borrar y la selección de datos a borrar, devolviendo cuantas filas fueron borradas.
+
+Por último cuando acabemos con la consulta a la base de datos hay que hacer un `.close()` al Helper para liberar sus recursos.
