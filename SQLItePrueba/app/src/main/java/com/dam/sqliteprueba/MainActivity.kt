@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
             put(FeedEntry.COLUMN_NAME_TITLE, "My Title")
             put(FeedEntry.COLUMN_NAME_SUBTITLE, "prueba2")
         }
-        Log.d(TAG,"Creadas columnas")
+        Log.d(TAG,"Creada fila")
 
 
         // Insert the new row, returning the primary key value of the new row
